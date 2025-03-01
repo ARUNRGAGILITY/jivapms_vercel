@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+app_name = "app1"
+mod_name = ""
 def home(request):
-    message = """
-<h1>Welcome to My Django App on Vercel!</h1><br>Project/Product Management System. v1.
-<br>
-This is an open-source software based on MIT license.
-check1 - production with main and public repo
-with the new jivapms.vercel.app configured
-"""
-    return HttpResponse(f"{message}")
+    
+    context = {
+        'page': 'home',
+        'page_title': 'Home Page'
+    }
+    template_file_url = f"{app_name}/home/home.html"
+    return render(request, template_file_url, context)
