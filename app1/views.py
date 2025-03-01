@@ -2,4 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def home(request):
-    return HttpResponse("<h1>Welcome to My Django App on Vercel!</h1><br>Project/Product Management System. v1")
+    message = """
+<h1>Welcome to My Django App on Vercel!</h1><br>Project/Product Management System. v1.
+<br>
+This is an open-source software based on MIT license.
+"""
+    return HttpResponse(f"{message}")
