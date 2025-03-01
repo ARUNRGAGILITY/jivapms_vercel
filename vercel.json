@@ -1,9 +1,15 @@
 {
-  
-  "routes": [
+    "version": 2,
+    
+    "routes": [
       {
-          "src": "/(.*)",
-          "dest": "project1/wsgi.py"
+        "src": "/static/(.*)",
+        "dest": "/staticfiles/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "wsgi.py"
       }
-  ]
-}
+    ]
+  }
+  
