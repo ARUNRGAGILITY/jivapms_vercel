@@ -139,6 +139,9 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 # Static Files Configuration
 STATIC_URL = "/static/"  # URL prefix for static files
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # Folder where static files are collected
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 
 # Use WhiteNoise for Static File Compression & Caching
