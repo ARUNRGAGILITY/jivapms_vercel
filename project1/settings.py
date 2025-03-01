@@ -133,12 +133,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Static Files Configuration
-STATIC_URL = "/static/"  # URL prefix for static files
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # Folder where static files are collected
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+# Static Files Configuration
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # For collectstatic
 
+# Media Files Configuration
+MEDIA_URL = '/media/'  # Public URL path for media files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Absolute path where media files are stored
 
 # Use WhiteNoise for Static File Compression & Caching
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
