@@ -7,5 +7,6 @@ def home(request):
 <br>
 This is an open-source software based on MIT license.
 check1 - production with main and public repo
+with the new jivapms.vercel.app configured
 """
     return HttpResponse(f"{message}")
