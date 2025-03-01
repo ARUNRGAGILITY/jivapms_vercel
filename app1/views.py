@@ -6,6 +6,6 @@ def home(request):
 <h1>Welcome to My Django App on Vercel!</h1><br>Project/Product Management System. v1.
 <br>
 This is an open-source software based on MIT license.
-check1
+check1 - production with main and public repo
 """
     return HttpResponse(f"{message}")
