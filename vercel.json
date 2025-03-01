@@ -8,6 +8,7 @@
         {
             "src": "/(.*)",
             "dest": "project1/wsgi.py"
-        }
+        },
+        { "src": "/static/(.*)", "dest": "/static/$1" }
     ]
   }
