@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ahl5l4cbd@vbjq-bu*&oh&=@)5&euz6n+lcwlvp)65nkfu&w0s
 DEBUG = True
 
 # Allowed Hosts
-ALLOWED_HOSTS = ["jivapms.vercel.app", "127.0.0.1"]
+ALLOWED_HOSTS = [".vercel.app", "127.0.0.1"]
 
 
 # Application definition
