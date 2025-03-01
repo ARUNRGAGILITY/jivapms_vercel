@@ -10,3 +10,4 @@ def home(request):
     }
     template_file_url = f"{app_name}/home/home.html"
     return render(request, template_file_url, context)
+
