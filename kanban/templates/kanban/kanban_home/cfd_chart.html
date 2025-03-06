@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cumulative Flow Diagram (CFD)</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h2>Cumulative Flow Diagram</h2>
+    <canvas id="cfdChart"></canvas>
+
+    <script>
+        // Load JSON data from Django view
+        const chartData = JSON.parse('{{ chart_data|safe }}');
+
+        // Define colors for each dataset
+        const colors = {
+            "Backlog": "rgba(255, 99, 132, 0.6)", // Red
+            "To Do": "rgba(54, 162, 235, 0.6)",  // Blue
+            "WIP": "rgba(255, 206, 86, 0.6)",    // Yellow
+            "Done": "rgba(75, 192, 192, 0.6)"    // Green
+        };
+
+        const borderColors = {
+            "Backlog": "rgba(255, 99, 132, 1)",
+            "To Do": "rgba(54, 162, 235, 1)",
+            "WIP": "rgba(255, 206, 86, 1)",
+            "Done": "rgba(75, 192, 192, 1)"
+        };
+
+        const ctx = document.getElementById('cfdChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: chartData.chartData.labels,
+                datasets: chartData.chartData.datasets.map(dataset => ({
+                    ...dataset,
+                    fill: true, // Stacked area chart effect
+                    backgroundColor: colors[dataset.label], // Fill color
+                    borderColor: borderColors[dataset.label], // Border color
+                    borderWidth: 2,
+                    pointRadius: 4,
+                    pointBackgroundColor: borderColors[dataset.label], // Points color
+                    tension: 0.3
+                }))
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            color: '#000', // Legend text color
+                            font: { size: 14 }
+                        }
+                    },
+                    tooltip: {
+                        enabled: true,
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                        titleFont: { size: 14, weight: 'bold' },
+                        bodyFont: { size: 12 },
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return `${tooltipItem.dataset.label}: ${tooltipItem.raw}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: '#333', // X-axis labels color
+                            font: { size: 12 }
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: '#333', // Y-axis labels color
+                            font: { size: 12 }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

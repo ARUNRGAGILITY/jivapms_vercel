@@ -4,11 +4,15 @@ import pytz
 
 IST = pytz.timezone("Asia/Kolkata")
 
+def get_ist_time():
+    """Returns the current time in IST timezone."""
+    return now().astimezone(IST)
+
 class Project(models.Model):
     name = models.CharField(max_length=255, unique=True)
     description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(default=now)
-    
+
     def __str__(self):
         return self.name
 
@@ -51,7 +55,7 @@ class Movement(models.Model):
     card = models.ForeignKey(Card, on_delete=models.CASCADE, related_name="movements")
     from_column = models.ForeignKey(Column, on_delete=models.CASCADE, related_name="moved_from")
     to_column = models.ForeignKey(Column, on_delete=models.CASCADE, related_name="moved_to")
-    moved_at = models.DateTimeField(default=lambda: now().astimezone(IST))
+    moved_at = models.DateTimeField(default=get_ist_time)  # ✅ Using named function
 
     def __str__(self):
         return f"{self.card.title} moved from {self.from_column.name} to {self.to_column.name} on {self.moved_at}"
@@ -60,7 +64,7 @@ class Movement(models.Model):
 class CFD(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="cfd_data")
     board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name="cfd_data")
-    data_timestamp = models.DateTimeField(default=lambda: now().astimezone(IST))
+    data_timestamp = models.DateTimeField(default=get_ist_time)  # ✅ Using named function
     column_card_counts = models.JSONField(default=dict, help_text="JSON structure of column-wise card counts")
 
     def __str__(self):

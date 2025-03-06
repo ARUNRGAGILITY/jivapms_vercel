@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cumulative Flow Diagram</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        canvas {
+            max-width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Cumulative Flow Diagram</h2>
+
+    <canvas id="cfdChart"></canvas>
+
+    <script>
+        var ctx = document.getElementById("cfdChart").getContext("2d");
+
+        var labels = ["2025-03-06", "2025-03-07", "2025-03-08", "2025-03-09", "2025-03-10",
+                      "2025-03-11", "2025-03-12", "2025-03-13", "2025-03-14", "2025-03-15",
+                      "2025-03-16", "2025-03-17", "2025-03-18", "2025-03-19"];
+
+        var toDoData = [47, 44, 41, 38, 35, 32, 29, 26, 23, 20, 17, 14, 11, 8];
+        var wipData = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];
+        var deployData = [0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];
+        var doneData = [0, 0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36];
+
+        var cfdChart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: "To Do",
+                        data: toDoData,
+                        borderColor: "red",
+                        backgroundColor: "rgba(255, 0, 0, 0.2)",
+                        fill: false
+                    },
+                    {
+                        label: "WIP",
+                        data: wipData,
+                        borderColor: "blue",
+                        backgroundColor: "rgba(0, 0, 255, 0.2)",
+                        fill: false
+                    },
+                    {
+                        label: "Deploy",
+                        data: deployData,
+                        borderColor: "orange",
+                        backgroundColor: "rgba(255, 165, 0, 0.2)",
+                        fill: false
+                    },
+                    {
+                        label: "Done",
+                        data: doneData,
+                        borderColor: "green",
+                        backgroundColor: "rgba(0, 255, 0, 0.2)",
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: "Number of Cards"
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: "Date"
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
